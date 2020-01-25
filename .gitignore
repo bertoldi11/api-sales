@@ -26,3 +26,6 @@ api_sales-*.tar
 # we ignore priv/static. You may want to comment
 # this depending on your deployment strategy.
 /priv/static/
+
+# Do not track volumes created by docker
+/volumes/
