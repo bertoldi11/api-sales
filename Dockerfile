@@ -13,3 +13,4 @@ COPY . /app
 WORKDIR /app
 
 RUN chmod +x wait-for-postgres-and-run.sh
+RUN chmod 766 ./volumes/database
