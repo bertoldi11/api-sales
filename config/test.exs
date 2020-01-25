@@ -2,8 +2,8 @@ use Mix.Config
 
 # Configure your database
 config :api_sales, ApiSales.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: "backend_dev",
+  password: "backend_dev",
   database: "api_sales_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox

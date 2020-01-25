@@ -5,14 +5,10 @@ defmodule ApiSalesWeb.EventControllerTest do
   alias ApiSales.Events.Event
 
   @create_attrs %{
-    date_event: ~N[2010-04-17 14:00:00],
-    name: "some name"
+    timestamp: ~N[2010-04-17 14:00:00],
+    event: "some event"
   }
-  @update_attrs %{
-    date_event: ~N[2011-05-18 15:01:01],
-    name: "some updated name"
-  }
-  @invalid_attrs %{date_event: nil, name: nil}
+  @invalid_attrs %{timestamp: nil, event: nil}
 
   def fixture(:event) do
     {:ok, event} = Events.create_event(@create_attrs)
@@ -32,16 +28,16 @@ defmodule ApiSalesWeb.EventControllerTest do
 
   describe "create event" do
     test "renders event when data is valid", %{conn: conn} do
-      conn = post(conn, Routes.event_path(conn, :create), event: @create_attrs)
-      assert %{"id" => id} = json_response(conn, 201)["data"]
+      conn = post(conn, Routes.event_path(conn, :create), @create_attrs)
+      assert [%{"id" => id}] = json_response(conn, 201)["data"]
 
-      conn = get(conn, Routes.event_path(conn, :show, id))
+      conn = get(conn, Routes.event_path(conn, :index))
 
-      assert %{
+      assert [%{
                "id" => id,
-               "date_event" => "2010-04-17T14:00:00",
-               "name" => "some name"
-             } = json_response(conn, 200)["data"]
+               "timestamp" => "2010-04-17T14:00:00Z",
+               "event" => "some event"
+             }] = json_response(conn, 200)["data"]
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
@@ -50,40 +46,6 @@ defmodule ApiSalesWeb.EventControllerTest do
     end
   end
 
-  describe "update event" do
-    setup [:create_event]
-
-    test "renders event when data is valid", %{conn: conn, event: %Event{id: id} = event} do
-      conn = put(conn, Routes.event_path(conn, :update, event), event: @update_attrs)
-      assert %{"id" => ^id} = json_response(conn, 200)["data"]
-
-      conn = get(conn, Routes.event_path(conn, :show, id))
-
-      assert %{
-               "id" => id,
-               "date_event" => "2011-05-18T15:01:01",
-               "name" => "some updated name"
-             } = json_response(conn, 200)["data"]
-    end
-
-    test "renders errors when data is invalid", %{conn: conn, event: event} do
-      conn = put(conn, Routes.event_path(conn, :update, event), event: @invalid_attrs)
-      assert json_response(conn, 422)["errors"] != %{}
-    end
-  end
-
-  describe "delete event" do
-    setup [:create_event]
-
-    test "deletes chosen event", %{conn: conn, event: event} do
-      conn = delete(conn, Routes.event_path(conn, :delete, event))
-      assert response(conn, 204)
-
-      assert_error_sent 404, fn ->
-        get(conn, Routes.event_path(conn, :show, event))
-      end
-    end
-  end
 
   defp create_event(_) do
     event = fixture(:event)
