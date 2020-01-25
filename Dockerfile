@@ -6,12 +6,10 @@ RUN mix local.hex --force \
   && apt-get install -y apt-utils \
   && apt-get install -y build-essential \
   && apt-get install -y inotify-tools \
+  && apt-get install -y postgresql-client \
   && mix local.rebar --force
 
 COPY . /app
 WORKDIR /app
 
-
-EXPOSE 4001
-
-CMD ["mix", "phx.server"]
+RUN chmod +x wait-for-postgres-and-run.sh

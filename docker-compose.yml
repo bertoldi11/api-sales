@@ -5,3 +5,12 @@ services:
     ports:
       - "4001:4001"
       - "4000:4000"
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+    command: ["./wait-for-postgres-and-run.sh", "db"]
+
+  db:
+    image: postgres:10.11 
+

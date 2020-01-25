@@ -2,10 +2,10 @@ use Mix.Config
 
 # Configure your database
 config :api_sales, ApiSales.Repo,
-  username: "backend_dev",
-  password: "backend_dev",
+  username: "postgres",
+  password: "postgres",
   database: "api_sales_dev",
-  hostname: "localhost",
+  hostname: "db",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
