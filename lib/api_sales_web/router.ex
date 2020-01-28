@@ -1,6 +1,6 @@
 defmodule ApiSalesWeb.Router do
   use ApiSalesWeb, :router
-  
+
   pipeline :api do
     plug :accepts, ["json"]
   end

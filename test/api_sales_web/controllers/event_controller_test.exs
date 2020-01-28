@@ -33,11 +33,13 @@ defmodule ApiSalesWeb.EventControllerTest do
 
       conn = get(conn, Routes.event_path(conn, :index))
 
-      assert [%{
-               "id" => id,
-               "timestamp" => "2010-04-17T14:00:00Z",
-               "event" => "some event"
-             }] = json_response(conn, 200)["data"]
+      assert [
+               %{
+                 "id" => id,
+                 "timestamp" => "2010-04-17T14:00:00Z",
+                 "event" => "some event"
+               }
+             ] = json_response(conn, 200)["data"]
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
@@ -45,7 +47,6 @@ defmodule ApiSalesWeb.EventControllerTest do
       assert json_response(conn, 422)["errors"] != %{}
     end
   end
-
 
   defp create_event(_) do
     event = fixture(:event)

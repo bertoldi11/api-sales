@@ -21,6 +21,10 @@ defmodule ApiSales.Events do
     Repo.all(Event)
   end
 
+  def list_events_by_term(term, limit \\ 100) do
+    Repo.all(from(e in Event, where: like(e.event, ^"#{term}%"), limit: ^limit))
+  end
+
   @doc """
   Gets a single event.
 

@@ -2,7 +2,7 @@ defmodule ApiSales.Repo.Migrations.CreateEventTable do
   use Ecto.Migration
 
   def up do
-    create table ("events") do
+    create table("events") do
       add :event, :string, null: false
       add :timestamp, :utc_datetime, null: false
       add :inserted_at, :utc_datetime, null: false
@@ -11,6 +11,6 @@ defmodule ApiSales.Repo.Migrations.CreateEventTable do
   end
 
   def down do
-    drop table ("events")
+    drop table("events")
   end
 end
