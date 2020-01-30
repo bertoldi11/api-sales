@@ -36,7 +36,7 @@ If limit is not present in query params, a default will be used (100)
 
 If term is not present in query params, all events will be returned respecting the rule above.
 
-To create a new envent send a post to the same path (localhost:4000/api/events) in the follow format:
+To create a new event send a post to the same path (localhost:4000/api/events) in the follow format:
 
 ```javascript
 { "event": "buy", "timestamp": "2016-09-22T13:57:31.2311892-04:00" }
