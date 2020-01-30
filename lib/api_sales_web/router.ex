@@ -9,4 +9,8 @@ defmodule ApiSalesWeb.Router do
     pipe_through :api
     resources "/events", EventController, only: [:index, :create]
   end
+
+  scope "/", ApiSalesWeb do
+    get "/", EventController, :index
+  end
 end
